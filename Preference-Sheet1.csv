@@ -1,0 +1,35 @@
+SUB,Label,Software_Lab,Hardware_Lab,Coding ,Simulation,Algorithm_Simulation ,Mathematical_Calculation,Networking,Information_Management ,Intelligent_system
+C,Programming Language Course,Y,N,Y,Y,N,N,N,N,N
+DATA STRUC,Algorithm and Complexity Course,Y,N,Y,Y,Y,N,N,N,N
+COMMUNICATION THEORY,Networking and Communication Course,Y,N,N,Y,N,N,Y,N,N
+DISCRETE ,Mathmatical Course,N,N,N,N,N,Y,N,N,N
+ELECTRICAL,Hardware Based Course,N,Y,N,Y,N,Y,N,N,N
+AI,Artificial Intelligence Based Course,N,N,Y,Y,N,Y,N,N,Y
+Info,MIS Course,Y,N,Y,Y,N,Y,N,Y,N
+Computer Arc,Architecture Course,N,N,N,Y,N,Y,N,N,N
+JAVA,Programming Language Course,Y,N,Y,Y,N,N,N,N,N
+DATA BASE,Programming Language Course,Y,N,Y,Y,N,N,N,N,N
+GRAPHICS,Programming Language Course,Y,N,Y,Y,N,Y,N,N,N
+IMAGE,Programming Language Course,N,N,Y,Y,N,Y,N,N,N
+WEB,Programming Language Course,Y,N,Y,N,N,N,N,N,N
+AD JAVA,Programming Language Course,Y,N,Y,Y,N,N,N,N,N
+SMART DEVI,Programming Language Course,Y,N,Y,Y,N,Y,N,N,N
+ALGORITHM,Algorithm and Complexity Course,Y,N,Y,Y,Y,N,N,N,N
+AD ALGO,Algorithm and Complexity Course,Y,N,Y,Y,Y,N,N,N,N
+GRAPH ,Algorithm and Complexity Course,N,N,N,Y,Y,N,N,N,N
+THEROY OF COM,Algorithm and Complexity Course,N,N,N,Y,Y,N,N,N,N
+NETW,Networking and Communication Course,Y,N,N,Y,N,N,Y,N,N
+CRYPTO,Networking and Communication Course,N,N,N,Y,Y,Y,Y,N,N
+AD NET,Networking and Communication Course,Y,N,N,Y,N,N,Y,N,N
+NUMERICAL,Mathmatical Course,N,N,N,N,N,Y,N,N,N
+MATH ANA,Mathmatical Course,N,N,N,N,N,Y,N,N,N
+ELECTRONICS,Hardware Based Course,N,Y,N,Y,N,Y,N,N,N
+DLD,Hardware Based Course,N,Y,N,Y,N,Y,N,N,N
+EMB,Hardware Based Course,N,Y,Y,Y,N,Y,N,N,N
+AD EMB,Hardware Based Course,N,Y,Y,Y,N,Y,N,N,N
+VLSI,Hardware Based Course,N,Y,Y,Y,N,Y,N,N,N
+DATA MIN,Artificial Intelligence Based Course,N,N,N,Y,N,Y,N,N,Y
+MIS,MIS Course,N,N,N,Y,N,Y,N,N,N
+SDP,MIS Course,Y,N,Y,Y,Y,Y,N,N,N
+MICRO,Architecture Course,Y,Y,Y,Y,N,Y,N,N,N
+OS,Architecture Course,Y,N,Y,Y,N,Y,N,N,N

@@ -1,0 +1,223 @@
+from collections import Counter 
+import operator
+import pandas as pd
+import numpy as np
+df = pd.read_csv('C:\\Users\\alifs\\new_folder\\Preference-Sheet1.csv',  engine='python')
+print(df.head(10))
+print(df.columns)
+courses = df[['Software_Lab', 'Hardware_Lab', 'Coding ', 'Simulation', 'Algorithm_Simulation ', 'Mathematical_Calculation', 'Networking', 'Information_Management ', 'Intelligent_system']]
+course_list = [[a,b,c,d,e,f,g,j,i] for a,b,c,d,e,f,g,j,i in zip(df['Software_Lab'], df['Hardware_Lab'],df['Coding '],df['Simulation'],df['Algorithm_Simulation '],df['Mathematical_Calculation'],df['Networking'],df['Information_Management '],df['Intelligent_system'],)]
+print(course_list)
+labels = df[['Label']]
+label_list = [x for x in df['Label']]
+print(label_list)
+def split(dataset, labels, column):
+    data_subsets = []
+    label_subsets = []
+    counts = list(set([data[column] for data in dataset]))
+    counts.sort()
+    for k in counts:
+        new_data_subset = []
+        new_label_subset = []
+        for i in range(len(dataset)):
+            if dataset[i][column] == k:
+                new_data_subset.append(dataset[i])
+                new_label_subset.append(labels[i])
+        data_subsets.append(new_data_subset)
+        label_subsets.append(new_label_subset)
+    return data_subsets, label_subsets
+
+
+def gini(dataset):
+    impurity = 1
+    label_counts = Counter(dataset)
+    for label in label_counts:
+        prob_of_label = label_counts[label] / len(dataset)
+        impurity -= prob_of_label ** 2
+    return impurity
+
+class Leaf:
+    def __init__(self, labels, value):
+        self.labels = Counter(labels)
+        self.value = value
+
+
+class Internal_Node:
+    def __init__(self,
+                 feature,
+                 branches,
+                 value):
+        self.feature = feature
+        self.branches = branches
+        self.value = value
+
+
+def information_gain(starting_labels, split_labels):
+    info_gain = gini(starting_labels)
+    for subset in split_labels:
+        info_gain -= gini(subset) * len(subset)/len(starting_labels)
+    return info_gain
+
+
+def find_best_split_subset(dataset, labels, num_features):
+    features = np.random.choice(6, 3, replace=False)
+    best_gain = 0
+    best_feature = 0
+    for feature in features:
+        data_subsets, label_subsets = split(dataset, labels, feature)
+        gain = information_gain(labels, label_subsets)
+        if gain > best_gain:
+            best_gain, best_feature = gain, feature
+    print(data_subsets)
+    return best_feature, best_gain
+
+def find_best_split(dataset, labels):
+    best_gain = 0
+    best_feature = 0
+    for feature in range(len(dataset[0])):
+        data_subsets, label_subsets = split(dataset, labels, feature)
+        gain = information_gain(labels, label_subsets)
+        if gain > best_gain:
+            best_gain, best_feature = gain, feature
+    return best_feature, best_gain
+
+
+
+def build_tree(data, labels, value = ""):
+    best_feature, best_gain = find_best_split(data, labels)
+    if best_gain < 0.00000001:
+        return Leaf(Counter(labels), value)
+    data_subsets, label_subsets = split(data, labels, best_feature)
+    branches = []
+    for i in range(len(data_subsets)):
+        branch = build_tree(data_subsets[i], label_subsets[i], data_subsets[i][0][best_feature])
+        branches.append(branch)
+    return Internal_Node(best_feature, branches, value)
+#future work
+def build_tree_forest(data,labels, n_features, value=""):
+    best_feature, best_gain = find_best_split_subset(data, labels, n_features)
+    if best_gain < 0.00000001:
+        return Leaf(Counter(labels), value)
+    data_subsets, label_subsets = split(data, labels, best_feature)
+    branches = []
+    for i in range(len(data_subsets)):
+        branch = build_tree_forest(data_subsets[i], label_subsets[i], n_features, data_subsets[i][0][best_feature])
+        branches.append(branch)
+    return Internal_Node(best_feature, branches, value)
+
+
+
+
+def classify(datapoint, tree):
+    if isinstance(tree, Leaf):
+        return max(tree.labels.items(), key=operator.itemgetter(1))[0]
+    value = datapoint[tree.feature]
+    for branch in tree.branches:
+        if branch.value == value:
+            return classify(datapoint, branch)
+
+
+
+tree = build_tree(course_list, label_list)
+test_point = ['Y', 'N', 'N', 'Y', 'N', 'N', 'Y', 'N', 'N']
+
+
+result = classify(test_point, tree)
+print(result)
+
+
+#suppose the varsity authority assigned him with java course 
+auth_assignment1 ="JAVA"
+#suppose the varsity authority assigned him with networking course 
+auth_assignment2 ="NETW"
+
+all_sub = df[df.Label.isin([result])]
+print(all_sub["SUB"])
+
+
+
+sub_list = [x for x in all_sub["SUB"]]
+#checking for networking
+if auth_assignment2 in sub_list:
+    feature_value = 1
+    print("preferred")
+else:
+    feature_value = 0
+    print("not prefferred")
+#checking for java
+if auth_assignment1 in sub_list:
+    print("\n\npreferred")
+else:
+    print("not prefferred")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
